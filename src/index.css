@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-void font-sans text-ink antialiased;
+    margin: 0;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  body.is-locked {
+    overflow: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.cyan.DEFAULT');
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: theme('colors.azure.DEFAULT');
+    color: #05070b;
+  }
+
+  @media (pointer: fine) {
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #05070b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e2637;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2c364c;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply relative py-20 md:py-32;
+  }
+
+  /* Frosted panel used by the nav, cards and the contact block */
+  .glass {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.055) 0%,
+      rgba(255, 255, 255, 0.018) 45%,
+      rgba(255, 255, 255, 0.006) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .glow-azure {
+    box-shadow: 0 0 0 1px rgba(77, 166, 255, 0.28), 0 24px 70px -30px rgba(77, 166, 255, 0.7);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.28), 0 24px 70px -30px rgba(34, 211, 238, 0.6);
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.3em] text-ink-faint;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04]
+      px-3 py-1 font-mono text-[11px] tracking-wide text-ink-muted;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-[15px] text-ink
+      placeholder:text-ink-faint transition-colors duration-300
+      hover:border-white/20 focus:border-cyan/60 focus:bg-white/[0.05] focus:outline-none;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(115deg, #ffffff 12%, #8cc6ff 52%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-lines {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 76px 76px;
+  }
+
+  /* Very subtle film grain over the whole page */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
